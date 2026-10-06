@@ -8,13 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		14C00A40307588C500CF523D /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 14C00A41307588C500CF523D /* Domain */; };
-		14C00A43307588C500CF523D /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = 14C00A44307588C500CF523D /* Data */; };
+		14C00A43307588C500CF523D /* DataLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 14C00A44307588C500CF523D /* DataLayer */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		14C00A7C307598A300CF523D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 14C00A1A307588C300CF523D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 14C00A21307588C400CF523D;
+			remoteInfo = gapsi;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		14C00A22307588C400CF523D /* gapsi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gapsi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14C00A30307588C500CF523D /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
 		14C00A31307588C500CF523D /* Secrets.example.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.example.xcconfig; sourceTree = "<group>"; };
+		14C00A78307598A300CF523D /* gapsiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gapsiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -36,6 +47,11 @@
 			path = gapsi;
 			sourceTree = "<group>";
 		};
+		14C00A79307598A300CF523D /* gapsiTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = gapsiTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +60,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				14C00A40307588C500CF523D /* Domain in Frameworks */,
-				14C00A43307588C500CF523D /* Data in Frameworks */,
+				14C00A43307588C500CF523D /* DataLayer in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14C00A75307598A300CF523D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +79,7 @@
 			children = (
 				14C00A32307588C500CF523D /* Config */,
 				14C00A24307588C400CF523D /* gapsi */,
+				14C00A79307598A300CF523D /* gapsiTests */,
 				14C00A23307588C400CF523D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -64,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				14C00A22307588C400CF523D /* gapsi.app */,
+				14C00A78307598A300CF523D /* gapsiTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -98,11 +123,34 @@
 			name = gapsi;
 			packageProductDependencies = (
 				14C00A41307588C500CF523D /* Domain */,
-				14C00A44307588C500CF523D /* Data */,
+				14C00A44307588C500CF523D /* DataLayer */,
 			);
 			productName = gapsi;
 			productReference = 14C00A22307588C400CF523D /* gapsi.app */;
 			productType = "com.apple.product-type.application";
+		};
+		14C00A77307598A300CF523D /* gapsiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14C00A7E307598A300CF523D /* Build configuration list for PBXNativeTarget "gapsiTests" */;
+			buildPhases = (
+				14C00A74307598A300CF523D /* Sources */,
+				14C00A75307598A300CF523D /* Frameworks */,
+				14C00A76307598A300CF523D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				14C00A7D307598A300CF523D /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				14C00A79307598A300CF523D /* gapsiTests */,
+			);
+			name = gapsiTests;
+			packageProductDependencies = (
+			);
+			productName = gapsiTests;
+			productReference = 14C00A78307598A300CF523D /* gapsiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -116,6 +164,10 @@
 				TargetAttributes = {
 					14C00A21307588C400CF523D = {
 						CreatedOnToolsVersion = 26.5;
+					};
+					14C00A77307598A300CF523D = {
+						CreatedOnToolsVersion = 26.5;
+						TestTargetID = 14C00A21307588C400CF523D;
 					};
 				};
 			};
@@ -137,12 +189,20 @@
 			projectRoot = "";
 			targets = (
 				14C00A21307588C400CF523D /* gapsi */,
+				14C00A77307598A300CF523D /* gapsiTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		14C00A20307588C400CF523D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14C00A76307598A300CF523D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -159,7 +219,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		14C00A74307598A300CF523D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		14C00A7D307598A300CF523D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 14C00A21307588C400CF523D /* gapsi */;
+			targetProxy = 14C00A7C307598A300CF523D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		14C00A2B307588C500CF523D /* Debug */ = {
@@ -368,6 +443,55 @@
 			};
 			name = Release;
 		};
+		14C00A7F307598A300CF523D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gapsi.test.gapsiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = NO;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = nonisolated;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gapsi.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/gapsi";
+			};
+			name = Debug;
+		};
+		14C00A80307598A300CF523D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gapsi.test.gapsiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = NO;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = nonisolated;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gapsi.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/gapsi";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -389,6 +513,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		14C00A7E307598A300CF523D /* Build configuration list for PBXNativeTarget "gapsiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14C00A7F307598A300CF523D /* Debug */,
+				14C00A80307598A300CF523D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
@@ -403,9 +536,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Domain;
 		};
-		14C00A44307588C500CF523D /* Data */ = {
+		14C00A44307588C500CF523D /* DataLayer */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Data;
+			productName = DataLayer;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

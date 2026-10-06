@@ -7,7 +7,7 @@
 
 import Foundation
 import Testing
-@testable import Data
+@testable import DataLayer
 @testable import Domain
 
 struct SearchResponseMapperTests {

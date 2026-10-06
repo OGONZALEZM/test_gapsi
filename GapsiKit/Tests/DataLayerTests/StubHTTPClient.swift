@@ -7,7 +7,7 @@
 
 import Foundation
 import os
-@testable import Data
+@testable import DataLayer
 
 final class StubHTTPClient: HTTPClient {
     enum Outcome: Sendable {

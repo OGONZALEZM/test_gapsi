@@ -7,7 +7,7 @@
 
 import Foundation
 import Testing
-@testable import Data
+@testable import DataLayer
 
 struct UserDefaultsSearchHistoryRepositoryTests {
     @Test func isEmptyByDefault() throws {

@@ -11,8 +11,8 @@ import SwiftUI
 struct SearchView: View {
     @StateObject private var viewModel: SearchViewModel
 
-    init(viewModel: SearchViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+    init(viewModel: @autoclosure @escaping () -> SearchViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel())
     }
 
     var body: some View {

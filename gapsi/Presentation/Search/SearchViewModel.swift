@@ -19,8 +19,16 @@ final class SearchViewModel: ObservableObject {
         case failure(ProductRepositoryError)
     }
 
+    enum PaginationState: Equatable {
+        case idle
+        case loading
+        case failed(ProductRepositoryError)
+        case finished
+    }
+
     @Published var queryText = ""
     @Published private(set) var state: State = .idle
+    @Published private(set) var pagination: PaginationState = .idle
     @Published private(set) var lastQuery: SearchQuery?
     @Published private(set) var history: [String]
 
@@ -64,36 +72,75 @@ final class SearchViewModel: ObservableObject {
         search(lastQuery)
     }
 
+    func loadNextPage() {
+        guard case .results = state, pagination == .idle, paginator.hasMore, let lastQuery else { return }
+        pagination = .loading
+        fetch(lastQuery, page: paginator.nextPage, kind: .nextPage)
+    }
+
+    func retryNextPage() {
+        guard case .failed = pagination else { return }
+        pagination = .idle
+        loadNextPage()
+    }
+
     private func search(_ query: SearchQuery) {
         searchTask?.cancel()
         lastQuery = query
         paginator = ProductPaginator()
+        pagination = .idle
         state = .loading
+        fetch(query, page: paginator.nextPage, kind: .firstPage)
+    }
 
-        let pageNumber = paginator.nextPage
+    private enum PageKind {
+        case firstPage
+        case nextPage
+    }
+
+    private func fetch(_ query: SearchQuery, page pageNumber: Int, kind: PageKind) {
         searchTask = Task { [weak self, searchUseCase] in
-            let result: Result<ProductPage, any Error>
+            let result: Result<ProductPage, ProductRepositoryError>
             do {
                 result = .success(try await searchUseCase.execute(query, page: pageNumber))
-            } catch {
+            } catch is CancellationError {
+                return
+            } catch let error as ProductRepositoryError {
                 result = .failure(error)
+            } catch {
+                result = .failure(.invalidData)
             }
-            guard !Task.isCancelled else { return }
-            self?.apply(result, pageNumber: pageNumber)
+            guard !Task.isCancelled, let self else { return }
+            switch kind {
+            case .firstPage: applyFirstPage(result, pageNumber: pageNumber)
+            case .nextPage: applyNextPage(result, pageNumber: pageNumber)
+            }
         }
     }
 
-    private func apply(_ result: Result<ProductPage, any Error>, pageNumber: Int) {
+    private func applyFirstPage(_ result: Result<ProductPage, ProductRepositoryError>, pageNumber: Int) {
         switch result {
         case .success(let page):
             let products = paginator.consume(page, pageNumber: pageNumber)
             state = products.isEmpty ? .empty : .results(products)
-        case .failure(is CancellationError):
-            return
-        case .failure(let error as ProductRepositoryError):
+            pagination = paginator.hasMore ? .idle : .finished
+        case .failure(let error):
             state = .failure(error)
-        case .failure:
-            state = .failure(.invalidData)
+        }
+    }
+
+    private func applyNextPage(_ result: Result<ProductPage, ProductRepositoryError>, pageNumber: Int) {
+        guard case .results(let current) = state else { return }
+        switch result {
+        case .success(let page):
+            let newProducts = paginator.consume(page, pageNumber: pageNumber)
+            state = .results(current + newProducts)
+            pagination = paginator.hasMore ? .idle : .finished
+            if newProducts.isEmpty {
+                loadNextPage()
+            }
+        case .failure(let error):
+            pagination = .failed(error)
         }
     }
 }

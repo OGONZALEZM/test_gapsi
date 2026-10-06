@@ -15,16 +15,18 @@ final class SuspendingProductRepository: ProductRepository {
     }
 
     private let suspendedQuery: String
+    private let suspendedPage: Int
     private let immediatePage: ProductPage
     private let state = OSAllocatedUnfairLock(initialState: State())
 
-    init(suspending suspendedQuery: String, otherwiseReturn immediatePage: ProductPage) {
+    init(suspending suspendedQuery: String, onPage suspendedPage: Int = 1, otherwiseReturn immediatePage: ProductPage) {
         self.suspendedQuery = suspendedQuery
+        self.suspendedPage = suspendedPage
         self.immediatePage = immediatePage
     }
 
     func search(_ query: SearchQuery, page: Int) async throws -> ProductPage {
-        guard query.value == suspendedQuery else { return immediatePage }
+        guard query.value == suspendedQuery, page == suspendedPage else { return immediatePage }
 
         return try await withCheckedThrowingContinuation { continuation in
             let waiter = state.withLock { state in

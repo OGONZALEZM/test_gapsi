@@ -41,8 +41,11 @@ struct SearchView: View {
             ProgressView()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         case .results(let products):
-            List(products) { product in
-                ProductRow(product: product)
+            List {
+                ForEach(products) { product in
+                    ProductRow(product: product)
+                }
+                paginationFooter
             }
             .listStyle(.plain)
             .scrollDismissesKeyboard(.immediately)
@@ -60,6 +63,36 @@ struct SearchView: View {
                 action: viewModel.retry
             )
         }
+    }
+
+    @ViewBuilder
+    private var paginationFooter: some View {
+        switch viewModel.pagination {
+        case .idle:
+            pageLoadingIndicator
+                .onAppear { viewModel.loadNextPage() }
+        case .loading:
+            pageLoadingIndicator
+        case .failed(let error):
+            VStack(spacing: 8) {
+                Text(error.message)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                Button("Try again", action: viewModel.retryNextPage)
+                    .buttonStyle(.bordered)
+            }
+            .frame(maxWidth: .infinity)
+            .listRowSeparator(.hidden)
+        case .finished:
+            EmptyView()
+        }
+    }
+
+    private var pageLoadingIndicator: some View {
+        ProgressView()
+            .frame(maxWidth: .infinity)
+            .listRowSeparator(.hidden)
     }
 
     private var recentSearches: some View {

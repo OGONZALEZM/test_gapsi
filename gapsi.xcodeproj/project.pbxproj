@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		14C00A40307588C500CF523D /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 14C00A41307588C500CF523D /* Domain */; };
 		14C00A43307588C500CF523D /* DataLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 14C00A44307588C500CF523D /* DataLayer */; };
+		14C00AC230759C9700CF523D /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 14C00A45307588C500CF523D /* Domain */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14C00AC230759C9700CF523D /* Domain in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

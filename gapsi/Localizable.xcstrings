@@ -1,10 +1,22 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Gapsi" : {
+
+    },
     "Hello, world!" : {
 
     },
     "No internet connection. Check your network and try again." : {
+
+    },
+    "No results for \"%@\"" : {
+
+    },
+    "Search for products" : {
+
+    },
+    "Something went wrong" : {
 
     },
     "The API key was rejected. Check Config/Secrets.xcconfig." : {
@@ -14,6 +26,9 @@
 
     },
     "The service is unavailable right now. Please try again." : {
+
+    },
+    "Try again" : {
 
     },
     "We couldn't read the results. Please try again." : {

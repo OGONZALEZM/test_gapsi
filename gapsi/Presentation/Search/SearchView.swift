@@ -20,6 +20,12 @@ struct SearchView: View {
             content
                 .navigationTitle("Gapsi")
                 .searchable(text: $viewModel.queryText)
+                .searchSuggestions {
+                    ForEach(viewModel.historySuggestions, id: \.self) { term in
+                        Label(term, systemImage: "clock.arrow.circlepath")
+                            .searchCompletion(term)
+                    }
+                }
                 .onSubmit(of: .search) { viewModel.submit() }
         }
     }
@@ -27,8 +33,10 @@ struct SearchView: View {
     @ViewBuilder
     private var content: some View {
         switch viewModel.state {
-        case .idle:
+        case .idle where viewModel.history.isEmpty:
             StatusView(systemImage: "magnifyingglass", title: Text("Search for products"))
+        case .idle:
+            recentSearches
         case .loading:
             ProgressView()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -53,11 +61,37 @@ struct SearchView: View {
             )
         }
     }
+
+    private var recentSearches: some View {
+        List {
+            Section("Recent searches") {
+                ForEach(viewModel.history, id: \.self) { term in
+                    Button {
+                        viewModel.search(historyTerm: term)
+                    } label: {
+                        Label(term, systemImage: "clock.arrow.circlepath")
+                            .foregroundStyle(.primary)
+                    }
+                }
+                .onDelete { offsets in
+                    offsets.map { viewModel.history[$0] }.forEach(viewModel.removeHistoryTerm)
+                }
+            }
+        }
+        .scrollDismissesKeyboard(.immediately)
+    }
 }
 
 #if DEBUG
 #Preview("Idle") {
     SearchView(viewModel: PreviewData.searchViewModel(result: .success(ProductPage(products: [], rawCount: 0, reportedMaxPage: nil))))
+}
+
+#Preview("Recent searches") {
+    SearchView(viewModel: PreviewData.searchViewModel(
+        result: .success(ProductPage(products: [], rawCount: 0, reportedMaxPage: nil)),
+        history: ["nintendo", "sony headphones", "laptop"]
+    ))
 }
 
 #Preview("Results") {

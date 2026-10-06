@@ -22,6 +22,7 @@ final class SearchViewModel: ObservableObject {
     @Published var queryText = ""
     @Published private(set) var state: State = .idle
     @Published private(set) var lastQuery: SearchQuery?
+    @Published private(set) var history: [String]
 
     private(set) var searchTask: Task<Void, Never>?
 
@@ -32,12 +33,30 @@ final class SearchViewModel: ObservableObject {
     init(searchUseCase: SearchProductsUseCase, historyUseCase: SearchHistoryUseCase) {
         self.searchUseCase = searchUseCase
         self.historyUseCase = historyUseCase
+        history = historyUseCase.terms()
+    }
+
+    var historySuggestions: [String] {
+        let text = queryText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !text.isEmpty else { return history }
+        return history.filter {
+            $0.localizedCaseInsensitiveContains(text) && $0.caseInsensitiveCompare(text) != .orderedSame
+        }
     }
 
     func submit() {
         guard let query = SearchQuery(queryText) else { return }
-        _ = historyUseCase.record(query)
+        history = historyUseCase.record(query)
         search(query)
+    }
+
+    func search(historyTerm term: String) {
+        queryText = term
+        submit()
+    }
+
+    func removeHistoryTerm(_ term: String) {
+        history = historyUseCase.remove(term)
     }
 
     func retry() {

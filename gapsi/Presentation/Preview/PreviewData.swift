@@ -41,11 +41,12 @@ enum PreviewData {
     @MainActor
     static func searchViewModel(
         result: Result<ProductPage, ProductRepositoryError>,
+        history: [String] = [],
         submitting query: String? = nil
     ) -> SearchViewModel {
         let viewModel = SearchViewModel(
             searchUseCase: SearchProductsUseCase(repository: PreviewProductRepository(result: result)),
-            historyUseCase: SearchHistoryUseCase(repository: PreviewSearchHistoryRepository())
+            historyUseCase: SearchHistoryUseCase(repository: PreviewSearchHistoryRepository(terms: history))
         )
         if let query {
             viewModel.queryText = query
@@ -64,7 +65,9 @@ private struct PreviewProductRepository: ProductRepository {
 }
 
 private struct PreviewSearchHistoryRepository: SearchHistoryRepository {
-    func load() -> [String] { [] }
+    let terms: [String]
+
+    func load() -> [String] { terms }
     func save(_ terms: [String]) {}
 }
 #endif

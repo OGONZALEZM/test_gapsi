@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		14C00A40307588C500CF523D /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 14C00A41307588C500CF523D /* Domain */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		14C00A22307588C400CF523D /* gapsi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gapsi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14C00A30307588C500CF523D /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
@@ -38,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14C00A40307588C500CF523D /* Domain in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +95,7 @@
 			);
 			name = gapsi;
 			packageProductDependencies = (
+				14C00A41307588C500CF523D /* Domain */,
 			);
 			productName = gapsi;
 			productReference = 14C00A22307588C400CF523D /* gapsi.app */;
@@ -119,6 +125,9 @@
 			);
 			mainGroup = 14C00A19307588C300CF523D;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				14C00A42307588C500CF523D /* XCLocalSwiftPackageReference "GapsiKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 14C00A23307588C400CF523D /* Products */;
 			projectDirPath = "";
@@ -302,8 +311,8 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = NO;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = nonisolated;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				XROS_DEPLOYMENT_TARGET = 26.5;
@@ -348,8 +357,8 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = NO;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = nonisolated;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				XROS_DEPLOYMENT_TARGET = 26.5;
@@ -378,6 +387,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		14C00A42307588C500CF523D /* XCLocalSwiftPackageReference "GapsiKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = GapsiKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		14C00A41307588C500CF523D /* Domain */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Domain;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 14C00A1A307588C300CF523D /* Project object */;
 }

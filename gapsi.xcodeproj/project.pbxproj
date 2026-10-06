@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		14C00A40307588C500CF523D /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 14C00A41307588C500CF523D /* Domain */; };
+		14C00A43307588C500CF523D /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = 14C00A44307588C500CF523D /* Data */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14C00A40307588C500CF523D /* Domain in Frameworks */,
+				14C00A43307588C500CF523D /* Data in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +98,7 @@
 			name = gapsi;
 			packageProductDependencies = (
 				14C00A41307588C500CF523D /* Domain */,
+				14C00A44307588C500CF523D /* Data */,
 			);
 			productName = gapsi;
 			productReference = 14C00A22307588C400CF523D /* gapsi.app */;
@@ -399,6 +402,10 @@
 		14C00A41307588C500CF523D /* Domain */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Domain;
+		};
+		14C00A44307588C500CF523D /* Data */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Data;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
